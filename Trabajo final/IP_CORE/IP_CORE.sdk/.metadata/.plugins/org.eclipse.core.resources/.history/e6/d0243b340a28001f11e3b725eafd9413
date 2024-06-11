@@ -1,0 +1,55 @@
+#include "xparameters.h"
+#include "xil_io.h"
+#include "cordic_ip.h"
+#include <stdio.h>
+#include <math.h>
+
+#define ANGLE_STEP 1  // Paso de ángulo en grados
+
+int main(void) {
+    xil_printf("-- Inicio del programa para validar el uso de IP cores propios --\r\n");
+
+    u32 base_address = 0x40000000;  // Dirección base del dispositivo CORDIC en el mapa de memoria
+
+    // Iterar sobre los ángulos en el rango de 0 a 45 grados
+    for (int angle = 0; angle <= 45; angle += ANGLE_STEP) {
+        // Convertir el ángulo de grados a radianes
+        double angle_rad = angle * M_PI / 180.0;
+
+        // Calcular los valores de entrada: Xin = cos(angle), Yin = sin(angle), angle en radianes
+        double Xin = cos(angle_rad);
+        double Yin = sin(angle_rad);
+
+        // Convertir los valores de entrada a enteros con signo de 32 bits
+        int Xin_int = (int)(Xin * (1 << 16));  // Considerando el ancho de bits definido en el Cordic
+        int Yin_int = (int)(Yin * (1 << 16));
+
+        // Escribir valores de entrada
+        CORDIC_IP_mWriteReg(base_address, CORDIC_IP_S_AXI_SLV_REG0_OFFSET, Xin_int);  // Xin
+        CORDIC_IP_mWriteReg(base_address, CORDIC_IP_S_AXI_SLV_REG1_OFFSET, Yin_int);  // Yin
+        CORDIC_IP_mWriteReg(base_address, CORDIC_IP_S_AXI_SLV_REG2_OFFSET, 0);         // angle (siempre 0 para la operación de rotación)
+
+        // Leer valores de salida
+        u32 Xout = CORDIC_IP_mReadReg(base_address, CORDIC_IP_S_AXI_SLV_REG3_OFFSET);  // Xout
+        u32 Yout = CORDIC_IP_mReadReg(base_address, CORDIC_IP_S_AXI_SLV_REG4_OFFSET);  // Yout
+
+        // Convertir los valores de salida a números de punto flotante
+        double Xout_float = (double)Xout / (1 << 16);  // Considerando el ancho de bits definido en el Cordic
+        double Yout_float = (double)Yout / (1 << 16);
+
+        // Imprimir resultados
+        printf("Ángulo: %d grados\n", angle);
+        printf("Seno: %.6f\n", Yout_float);
+        printf("Coseno: %.6f\n", Xout_float);
+        printf("---------------------------\n");
+    }
+
+    // Ejecutar auto-prueba
+    if (CORDIC_IP_Reg_SelfTest((void *)base_address) != XST_SUCCESS) {
+        printf("La auto-prueba del IP Cordic ha fallado.\n");
+        return -1;
+    }
+
+    printf("La auto-prueba del IP Cordic ha pasado correctamente.\n");
+    return 0;
+}

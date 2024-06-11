@@ -1,0 +1,12 @@
+verilog xil_defaultlib --include "../../../../IP_CORE.srcs/sources_1/bd/System/ipshared/ec67/hdl" --include "../../../../IP_CORE.srcs/sources_1/bd/System/ipshared/02c8/hdl/verilog" --include "../../../../IP_CORE.srcs/sources_1/bd/System/ipshared/b193/hdl" \
+"../../../bd/System/ip/System_processing_system7_0_0/sim/System_processing_system7_0_0.v" \
+"../../../bd/System/sim/System.v" \
+"../../../bd/System/ipshared/df97/hdl/Cordic_ip_v1_0_S_AXI.v" \
+"../../../bd/System/ipshared/df97/src/cordic_rotator.v" \
+"../../../bd/System/ipshared/df97/hdl/Cordic_ip_v1_0.v" \
+"../../../bd/System/ip/System_Cordic_ip_0_1/sim/System_Cordic_ip_0_1.v" \
+"../../../bd/System/ip/System_auto_pc_0/sim/System_auto_pc_0.v" \
+
+verilog xil_defaultlib "glbl.v"
+
+nosort

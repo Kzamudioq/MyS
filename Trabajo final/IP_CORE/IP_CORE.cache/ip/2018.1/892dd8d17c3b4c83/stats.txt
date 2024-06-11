@@ -1,0 +1,3 @@
+NumberHits:1
+Timestamp: Wed Jun 05 01:20:27 UTC 2024
+VLNV: xilinx.com:user:Cordic_ip:1.0

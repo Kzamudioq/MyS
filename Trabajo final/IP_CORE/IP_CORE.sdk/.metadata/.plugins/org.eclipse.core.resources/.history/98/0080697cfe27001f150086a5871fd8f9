@@ -1,0 +1,48 @@
+#include "xparameters.h"
+#include "xil_io.h"
+#include "cordic_ip.h"
+#include <stdio.h>
+ 
+
+//====================================================
+
+// Función para leer un número entero desde la consola
+int read_integer(const char* prompt) {
+    int value;
+    printf("%s", prompt);
+    scanf("%d", &value);
+    return value;
+}
+
+int main (void) {
+    xil_printf("-- Inicio del programa para validar el uso de IP cores propios --\r\n");
+
+    u32 base_address = 0x40000000;  // Dirección base del dispositivo CORDIC en el mapa de memoria
+
+    // Leer valores de entrada desde la consola
+    int Xin = read_integer("Ingrese el valor de Xin: ");
+    int Yin = read_integer("Ingrese el valor de Yin: ");
+    int angle = read_integer("Ingrese el valor de angle: ");
+
+    // Escribir valores de entrada en los registros del IP
+    CORDIC_IP_mWriteReg(base_address, CORDIC_IP_S_AXI_SLV_REG0_OFFSET, Xin);  // Xin
+    CORDIC_IP_mWriteReg(base_address, CORDIC_IP_S_AXI_SLV_REG1_OFFSET, Yin);  // Yin
+    CORDIC_IP_mWriteReg(base_address, CORDIC_IP_S_AXI_SLV_REG2_OFFSET, angle);  // angle
+
+    // Leer valores de salida desde los registros del IP
+    u32 Xout = CORDIC_IP_mReadReg(base_address, CORDIC_IP_S_AXI_SLV_REG3_OFFSET);  // Xout
+    u32 Yout = CORDIC_IP_mReadReg(base_address, CORDIC_IP_S_AXI_SLV_REG4_OFFSET);  // Yout
+
+    // Imprimir resultados
+    printf("Xout: %08lx\n", Xout);
+    printf("Yout: %08lx\n", Yout);
+
+    // Ejecutar auto-prueba
+    if (CORDIC_IP_Reg_SelfTest((void *)base_address) != XST_SUCCESS) {
+        printf("CORDIC IP self-test failed.\n");
+        return -1;
+    }
+
+    printf("CORDIC IP self-test passed.\n");
+    return 0;
+}
