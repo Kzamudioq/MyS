@@ -1,30 +1,28 @@
 \babel@toc {spanish}{}\relax 
 \contentsline {section}{\numberline {1}Introducción}{5}{section.1}%
 \contentsline {subsection}{\numberline {1.1}Objetivos}{5}{subsection.1.1}%
-\contentsline {subsection}{\numberline {1.2}Alcance}{6}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.2}Alcance}{5}{subsection.1.2}%
 \contentsline {section}{\numberline {2}CORDIC}{7}{section.2}%
 \contentsline {subsection}{\numberline {2.1}CORDIC trigonométrico}{7}{subsection.2.1}%
 \contentsline {subsection}{\numberline {2.2}CORDIC vectorial}{8}{subsection.2.2}%
 \contentsline {subsection}{\numberline {2.3}CORDIC logarítmico}{9}{subsection.2.3}%
-\contentsline {section}{\numberline {3}Implementación CORDIC rotator}{10}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Configuración de Tiempo y Declaración de Módulo}{10}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Declaración de la Tabla \texttt {atan\_table}}{11}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}Inicialización de registros y asignación de cuadrante}{11}{subsection.3.3}%
-\contentsline {subsubsection}{\numberline {3.3.1}Cuadrante I}{11}{subsubsection.3.3.1}%
-\contentsline {subsubsection}{\numberline {3.3.2}Cuadrante II}{12}{subsubsection.3.3.2}%
-\contentsline {subsubsection}{\numberline {3.3.3}Cuadrante III}{12}{subsubsection.3.3.3}%
-\contentsline {subsubsection}{\numberline {3.3.4}Cuadrante IV}{12}{subsubsection.3.3.4}%
-\contentsline {subsection}{\numberline {3.4}Banco de pruebas}{13}{subsection.3.4}%
-\contentsline {subsubsection}{\numberline {3.4.1}Parámetros y variables locales}{13}{subsubsection.3.4.1}%
-\contentsline {subsubsection}{\numberline {3.4.2}Inicialización}{14}{subsubsection.3.4.2}%
-\contentsline {subsubsection}{\numberline {3.4.3}Generación de formas de onda}{14}{subsubsection.3.4.3}%
-\contentsline {subsubsection}{\numberline {3.4.4}Generación del reloj}{15}{subsubsection.3.4.4}%
-\contentsline {subsubsection}{\numberline {3.4.5}Salida del módulo}{15}{subsubsection.3.4.5}%
-\contentsline {subsection}{\numberline {3.5}Simulación}{15}{subsection.3.5}%
-\contentsline {subsection}{\numberline {3.6}Simulación en vivado}{15}{subsection.3.6}%
-\contentsline {subsection}{\numberline {3.7}Uso de la IP VIO en el módulo \texttt {cordic\_rotator}}{17}{subsection.3.7}%
-\contentsline {subsection}{\numberline {3.8}Esquema}{18}{subsection.3.8}%
-\contentsline {subsection}{\numberline {3.9}Generación del archivo .bit}{18}{subsection.3.9}%
-\contentsline {section}{\numberline {4}Análisis de la Síntesis en Vivado}{21}{section.4}%
-\contentsline {section}{\numberline {5}Conclusiones}{22}{section.5}%
-\contentsline {section}{\numberline {6}Bibliografía}{23}{section.6}%
+\contentsline {section}{\numberline {3}Descripción del módulo CORDIC modo rotador}{10}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Cuadrante I}{11}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Cuadrante II}{11}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Cuadrante III}{12}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Cuadrante IV}{12}{subsection.3.4}%
+\contentsline {section}{\numberline {4}Creación de la IP}{13}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Usar el template de periférico esclavo}{13}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Integración del Módulo}{13}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Descripción del flujo de trabajo creación IP en vivado}{15}{subsection.4.3}%
+\contentsline {section}{\numberline {5}Inclusión de IP en el código}{18}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Modificar la configuración del proyecto}{18}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Agregar la IP personalizada}{18}{subsection.5.2}%
+\contentsline {section}{\numberline {6}Diagrama de bloques }{19}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Generar el Top-Level y Export el diseño de hardware al SDK}{19}{subsection.6.1}%
+\contentsline {section}{\numberline {7}Conectar a servidor y SDK.}{20}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Conectar a servidor}{21}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Código para validar el Uso de IP cores propios}{21}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}SDK}{25}{subsection.7.3}%
+\contentsline {section}{\numberline {8}Conclusiones}{26}{section.8}%
+\contentsline {section}{\numberline {9}Bibliografía}{28}{section.9}%

@@ -40,10 +40,10 @@
 \renewcommand{\headrulewidth}{1.0pt}
 \pagestyle{fancy}
 \date{}
-\title{Circuitos lógicos programables}
+\title{Arquitectura de microprocesadores}
 \hypersetup{
     pdfauthor={},
-    pdftitle={Testing de software en sistemas embebidos},
+    pdftitle={Arquitectura de Microprocesadores},
     pdfkeywords={},
     pdfsubject={},
     pdfcreator={Emacs 26.2 (Org mode 9.1.9)},
@@ -66,10 +66,10 @@
 
         \vspace{1.5cm}
 
-        \textbf{\LARGE CORDIC modo rotador}
+        \textbf{\LARGE IP CORDIC modo rotador}
 
         \vspace{4cm}
-        \textbf{\Large Circuitos lógicos programables}
+        \textbf{\Large Arquitectura de microprocesadores}
 
         \vspace{1.5cm}
 
@@ -87,7 +87,7 @@
         \textbf{\Large Universidad de Buenos Aires}\\
         \vspace{0.2cm}
 
-        \large  11 abril 2024
+        \large  11 junio 2024
 
     \end{center}
 \end{titlepage}
@@ -104,9 +104,9 @@
     \hline
     Revisión & Detalles de los cambios realizados & Fecha \\
     \hline
-    0 & Creación del documento & \ 11 de abril 2024 \\
+    0 & Creación del documento & \ 01 de junio 2024 \\
     \hline
-    1 & Entrega  & \ 23 de abril 2024 \\
+    1 & Entrega  & \ 11 de junio 2024 \\
     \hline
   \end{tabularx}
 \end{table}
@@ -119,9 +119,9 @@
 \section{Introducción}
 \label{sec:org60390fa}
 
-En el contexto del diseño digital y la implementación de algoritmos, el presente documento aborda la creación y análisis de un módulo de rotación basado en el algoritmo CORDIC (Coordinate Rotation Digital Computer). El algoritmo CORDIC es ampliamente utilizado en sistemas digitales para calcular funciones trigonométricas y transformaciones de coordenadas de manera eficiente.
+El presente trabajo práctico final tiene como objetivo la implementación de un bloque de hardware digital en una FPGA, que formará parte de un sistema base de procesamiento junto con un micro Cortex A9.
 
-Este documento proporcionará una visión general del diseño del módulo cordic rotator, destacando su funcionamiento, estructura interna y su implementación en una FPGA (Field-Programmable Gate Array). Además, se presentarán los resultados de simulaciones y se analizará el uso de recursos de la FPGA.
+Este bloque implementará un módulo de rotación basado en el algoritmo CORDIC (Coordinate Rotation Digital Computer) en modo rotador, el cual será una parte constitutiva del trabajo final de carrera del alumno. El funcionamiento del bloque incluirá la transferencia de datos entre el procesador y el módulo implementado, mediante un código C.
 
 
 \subsection{Objetivos}
@@ -130,24 +130,34 @@ Este documento proporcionará una visión general del diseño del módulo cordic
 Analizar y documentar el diseño, implementación y funcionamiento del módulo cordic rotator basado en el algoritmo CORDIC, así como evaluar su eficiencia y aplicabilidad en sistemas digitales.
 
 \begin{enumerate}
-
-\item Describir el algoritmo CORDIC y su aplicación en rotación de coordenadas: proporcionar una explicación detallada del algoritmo CORDIC y cómo se utiliza para realizar rotaciones de coordenadas cartesianas en el diseño del módulo cordic rotator.
-
-\item Implementar el módulo cordic rotator en Verilog: crear una implementación en Verilog del módulo cordic rotator, asegurando que el código refleje correctamente la lógica del algoritmo CORDIC y que sea adecuado para su uso en sistemas digitales.
-
-\item Realizar simulaciones del módulo y analizar su comportamiento: ejecutar simulaciones del módulo cordic rotator en un entorno de simulación, utilizando diferentes casos de prueba para evaluar su funcionamiento en una variedad de escenarios. Analizar los resultados de las simulaciones para verificar la precisión y eficacia del diseño.
-
-\item Evaluar el uso de recursos de la FPGA: realizar un análisis exhaustivo del uso de recursos de la FPGA por parte del diseño del módulo cordic rotator, incluyendo el número de LUTs, FFs y otros recursos utilizados. Identificar áreas de mejora en términos de eficiencia y optimización del diseño.
-
+    \item Implementar un módulo de rotación basado en el algoritmo CORDIC en Verilog.
+    \item Simular todos los componentes del bloque principal.
+    \item Sintetizar e implementar el diseño en una FPGA.
+    \item Desarrollar una aplicación en C para la transferencia de datos entre el micro y el módulo de rotación CORDIC.
+    \item Documentar el trabajo realizado, incluyendo una explicación del diseño, diagramas en bloques del circuito, capturas de simulaciones y tabla de uso de recursos de la FPGA.
+    \item Configurar la FPGA y validar el funcionamiento del bloque implementado.
+    \item Presentar los resultados en una presentación de 10 minutos en la última clase de la materia.
 \end{enumerate}
 
 
 \subsection{Alcance}
 \label{subsec:org12e44a2}
 
-El alcance de este documento abarca la descripción detallada del diseño e implementación del módulo cordic rotator utilizando el algoritmo CORDIC en Verilog. Se incluirá una explicación exhaustiva del funcionamiento del algoritmo CORDIC y su aplicación en la rotación de coordenadas cartesianas. Además, se proporcionará el código Verilog del módulo cordic rotator junto con explicaciones detalladas de su estructura interna y su funcionamiento.
+El alcance de este trabajo final abarca la implementación y análisis de un módulo de rotación basado en el algoritmo CORDIC en una FPGA, como parte integral del trabajo final de carrera del alumno. Se llevará a cabo lo siguiente:
 
- Se realizarán simulaciones del módulo en un entorno adecuado para evaluar su comportamiento en diversos escenarios, y se analizarán los resultados obtenidos. Asimismo, se llevará a cabo un análisis del uso de recursos de la FPGA por parte del diseño, con el objetivo de evaluar su eficiencia y escalabilidad en sistemas digitales.
+\begin{enumerate}
+
+    \item Implementación del módulo de rotación CORDIC en VHDL/Verilog.
+    \item Simulación exhaustiva del módulo para verificar su funcionamiento y precisión.
+    \item Síntesis e implementación del diseño en una FPGA.
+    \item Desarrollo de una aplicación en C para la transferencia de datos entre el micro y el módulo CORDIC.
+    \item Documentación detallada del diseño, incluyendo explicaciones, diagramas en bloques, capturas de simulaciones y tabla de uso de recursos de la FPGA.
+    \item Configuración y validación del funcionamiento del módulo implementado en la FPGA.
+    \item Presentación de los resultados y análisis en una sesión de 10 minutos al finalizar la materia.
+\end{enumerate}
+
+
+El alcance de este trabajo final se centra en la implementación práctica del módulo de rotación CORDIC y su integración en un sistema de procesamiento basado en una FPGA. Se espera que este trabajo demuestre el dominio de los conceptos teóricos y prácticos adquiridos durante el curso, así como la capacidad para aplicarlos en un proyecto real.
 
 \newpage
 
@@ -215,14 +225,12 @@ El CORDIC logarítmico tiene una amplia gama de aplicaciones en sistemas digital
 
 \newpage
 
-\section{Implementación CORDIC rotator}
-\label{sec:orgc1c4017}
+\section{Descripción del módulo CORDIC modo rotador}
+\label{sec:descripcion}
 
-En esta sección, se detalla la implementación del módulo CORDIC Rotator en Verilog. El módulo CORDIC Rotator es una implementación hardware del algoritmo CORDIC (Coordinate Rotation Digital Computer), diseñado para realizar rotaciones de vectores en el plano cartesiano. El algoritmo CORDIC se utiliza ampliamente en sistemas digitales para calcular funciones trigonométricas, transformaciones de coordenadas y otras operaciones matemáticas de manera eficiente. En esta sección, se explicará paso a paso la implementación del módulo CORDIC rotator, incluyendo la configuración de parámetros, la definición de la tabla de arco tangente, las iteraciones del algoritmo y la salida del módulo. Cada parte de la implementación se analizará en detalle, acompañada de su correspondiente código en Verilog.
+En esta sección, se detalla la implementación del módulo CORDIC Rotator en Verilog. El módulo CORDIC Rotator es una implementación hardware del algoritmo CORDIC (Coordinate Rotation Digital Computer), diseñado para realizar rotaciones de vectores en el plano cartesiano. El algoritmo CORDIC se utiliza ampliamente en sistemas digitales para calcular funciones trigonométricas, transformaciones de coordenadas y otras operaciones matemáticas de manera eficiente. A continuación, se explicará paso a paso la implementación del módulo CORDIC rotator, incluyendo la configuración de parámetros, la definición de la tabla de arco tangente, las iteraciones del algoritmo y la salida del módulo. Cada parte de la implementación se analizará en detalle, acompañada de su correspondiente código en Verilog.
 
-\subsection{Configuración de Tiempo y Declaración de Módulo}
-
-El código comienza con la configuración del \texttt{timescale} y la definición de parámetros utilizados en el módulo. El parámetro \texttt{c parameter} determina el ancho de bits de los datos de entrada y salida, mientras que \texttt{STG} se utiliza para definir el ancho de bits de los vectores \texttt{X} e \texttt{Y}. Luego, se declara el módulo \texttt{cordic rotator} con sus entradas (\texttt{clock}, \texttt{angle}, \texttt{Xin}, \texttt{Yin}) y salidas (\texttt{Xout}, \texttt{Yout}).
+Para comenzar, el código inicia con la configuración del \texttt{timescale} y la definición de parámetros utilizados en el módulo. El parámetro \texttt{c\_parameter} determina el ancho de bits de los datos de entrada y salida, mientras que \texttt{STG} se utiliza para definir el ancho de bits de los vectores \texttt{X} e \texttt{Y}. Luego, se declara el módulo \texttt{cordic\_rotator} con sus entradas (\texttt{clock}, \texttt{angle}, \texttt{Xin}, \texttt{Yin}) y salidas (\texttt{Xout}, \texttt{Yout}).
 
 \begin{lstlisting}[language=Verilog]
 `timescale 1ns/100ps
@@ -240,23 +248,17 @@ parameter c_parameter = 16;
 localparam STG = c_parameter;
 \end{lstlisting}
 
-\subsection{Declaración de la Tabla \texttt{atan\_table}}
-
 La tabla \texttt{atan\_table} contiene los valores de la función arco tangente utilizados en el algoritmo CORDIC. Estos valores están precalculados y se utilizan para realizar las operaciones de rotación en el módulo. La tabla está definida como un arreglo de 31 bits con 31 entradas, cada una representando un ángulo específico.
 
 \begin{lstlisting}[language=Verilog]
-
 wire signed [31:0] atan_table [0:30];
 assign atan_table[00] = 32'b00100000000000000000000000000000; 
 // Resto de asignaciones de la tabla atan_table...
-
 \end{lstlisting}
-
-\subsection{Inicialización de registros y asignación de cuadrante}
 
 Se inicializan los registros \texttt{X}, \texttt{Y} y \texttt{Z}, que se utilizan para almacenar los datos en cada etapa del algoritmo CORDIC. Luego, se calcula el cuadrante en el que se encuentra el ángulo de rotación para determinar cómo se deben tratar los datos de entrada.
 
-\subsubsection{Cuadrante I}
+\subsection{Cuadrante I}
 
 En el cuadrante I, el ángulo de rotación se encuentra en el rango de 0 a $\pi$/2. En este caso, no es necesario realizar ninguna modificación en los datos de entrada, ya que están en el rango adecuado para ser procesados por el algoritmo CORDIC. Por lo tanto, los valores de las coordenadas X e Y del vector de entrada (\texttt{Xin} y \texttt{Yin}) se asignan directamente a los registros \texttt{X[0]} y \texttt{Y[0]}, respectivamente. Además, el ángulo de rotación (\texttt{angle}) se asigna directamente al registro \texttt{Z[0]}.
 
@@ -270,7 +272,7 @@ En el cuadrante I, el ángulo de rotación se encuentra en el rango de 0 a $\pi$
 
 Este caso se activa cuando los bits de signo del ángulo son 0, indicando que el ángulo se encuentra en el primer cuadrante.
 
-\subsubsection{Cuadrante II}
+\subsection{Cuadrante II}
 
 En el cuadrante II, el ángulo de rotación se encuentra en el rango de $\pi$/2 a $\pi$. Para ajustar los datos de entrada al rango adecuado para el algoritmo CORDIC, se realiza una pre-rotación del ángulo. En este caso, el ángulo se resta de $\pi$ para asegurar que esté dentro del rango de -$\pi$/2 a 0. Los valores de las coordenadas X e Y del vector de entrada se asignan a los registros \texttt{X[0]} y \texttt{Y[0]}, respectivamente, de la misma manera que en el cuadrante I.
 
@@ -283,7 +285,7 @@ En el cuadrante II, el ángulo de rotación se encuentra en el rango de $\pi$/2 
 
 Este caso se activa cuando el bit de signo más significativo del ángulo es 0 y el siguiente bit es 1, indicando que el ángulo se encuentra en el segundo cuadrante.
 
-\subsubsection{Cuadrante III}
+\subsection{Cuadrante III}
 
 En el cuadrante III, el ángulo de rotación se encuentra en el rango de -$\pi$ a -$\pi$/2. Al igual que en el cuadrante II, se realiza una pre-rotación del ángulo restando $\pi$ para asegurar que esté dentro del rango de -$\pi$/2 a 0. Los valores de las coordenadas X e Y del vector de entrada se asignan a los registros \texttt{X[0]} y \texttt{Y[0]}, respectivamente, de la misma manera que en los cuadrantes I y II.
 
@@ -296,13 +298,12 @@ En el cuadrante III, el ángulo de rotación se encuentra en el rango de -$\pi$ 
 
 Este caso se activa cuando el bit de signo más significativo del ángulo es 1 y el siguiente bit es 0, indicando que el ángulo se encuentra en el tercer cuadrante.
 
-\subsubsection{Cuadrante IV}
+\subsection{Cuadrante IV}
 
 En el cuadrante IV, el ángulo de rotación se encuentra en el rango de -$\pi$/2 a 0. Para ajustar los datos de entrada al rango adecuado para el algoritmo CORDIC, se realiza una pre-rotación del ángulo restando 2$\pi$ para asegurar que esté dentro del rango de -$\pi$/2 a -$\pi$. Los valores de las coordenadas X e Y del vector de entrada se asignan a los registros \texttt{X[0]} y \texttt{Y[0]}, respectivamente, de la misma manera que en los cuadrantes I, II y III.
 
-
 \begin{lstlisting}[language=Verilog]
-       2'b10: begin // Cuadrante III
+       2'b11: begin // Cuadrante IV
                X[0] <=    Xin;
                Y[0] <=    Yin;
                Z[0] <=    angle - 32'b10000000000000000000000000000000; 
@@ -310,277 +311,312 @@ En el cuadrante IV, el ángulo de rotación se encuentra en el rango de -$\pi$/2
 
 Este caso se activa cuando los bits de signo del ángulo son 1, indicando que el ángulo se encuentra en el cuarto cuadrante.
 
+\newpage
+
+\section{Creación de la IP}
+
+Para crear una IP personalizada que incluya el módulo \texttt{cordic\_rotator}, se puede utilizar el template de periférico esclavo de Vivado. A continuación se describen los pasos para realizar esta tarea.
+
+\subsection{Usar el template de periférico esclavo}
+
+Para comenzar, abre Vivado seleccionando \textit{Start $\rightarrow$ Xilinx Design Tools $\rightarrow$ Vivado 2018.1}. Luego, haz clic en \textit{Manage IP}, elige \textit{New IP Location}, y selecciona \textit{Next} en la ventana \textit{New IP Location}. Selecciona la placa correspondiente, \textit{verilog} como \textit{Target Language}, y \textit{Mixed} como \textit{Simulator Language}. Para el campo \textit{IP Location}, elige una ubicación como, por ejemplo, el lugar donde se encuentran todas las prácticas y crea una carpeta \textit{cordic\textunderscore ip}. Presiona \textit{Finish}. Si el directorio no existe, se solicitará la creación.
+
+\subsection{Integración del Módulo}
 
 
-\subsection{Banco de pruebas}
-
-El banco de pruebas proporcionado se encarga de simular el módulo \texttt{cordic\_rotator} y generar formas de onda de entrada para probar su funcionalidad. Aquí tienes una explicación detallada de su funcionamiento:
-
-\subsubsection{Parámetros y variables locales}
-Se definen algunos parámetros y variables locales para el tamaño de los datos de entrada (\texttt{SZ}), los valores booleanos (\texttt{FALSE} y \texttt{TRUE}), y el valor de la señal de entrada (\texttt{VALUE}), que se reduce para ajustarse a la ganancia del sistema.
-
-\begin{lstlisting}[language=Verilog]
-
-localparam SZ = 16; 
-
-reg [SZ-1:0] Xin, Yin;
-reg [31:0] angle;
-wire [SZ:0] Xout, Yout;
-reg CLK_100MHZ;
-
-localparam FALSE = 1'b0;
-localparam TRUE = 1'b1;
-
-// reducido por un factor de 1.647 ya que es la ganancia del sistema (k)
-localparam VALUE = 32000/1.647; 
-
-\end{lstlisting}
-
-\subsubsection{Inicialización}
-Antes de comenzar la simulación, se inicializan las variables y las señales de entrada. Se establece \texttt{start} en \texttt{FALSE}, se inicializa la señal de reloj \texttt{CLK\_100MHZ}, el ángulo en cero, y se establece un valor inicial para \texttt{Xin} y \texttt{Yin}.
-
-\begin{lstlisting}[language=Verilog]
-initial
-begin
-    start = FALSE;
-    CLK_100MHZ = 1'b0;
-    angle = 0;
-    Xin = VALUE;
-    Yin = 1'd0;
-    i = 0;
-  
-    #1000;
-    @(posedge CLK_100MHZ);
-    start = TRUE;
-\end{lstlisting}
-
-\subsubsection{Generación de formas de onda}
-Durante la simulación, se genera una señal de reloj de 100 MHz (\texttt{CLK\_100MHZ}). Después de un breve período de espera, se activa \texttt{start} para indicar que la simulación comienza y se comienza a generar una secuencia de ángulos para probar el módulo \texttt{cordic\_rotator}.
-
-\begin{lstlisting}[language=Verilog]
-for (i = 0; i < 360; i = i + 1)  
-
-begin
-    @(posedge CLK_100MHZ);
-    #11700
-    start = FALSE;
-    angle = ((1 << 32)*(i+1))/360;
-end
-\end{lstlisting}
-
-\subsubsection{Generación del reloj}
-Se genera una señal de reloj de 100 MHz (\texttt{CLK\_100MHZ}) con una duración de tiempo determinada por \texttt{CLK100\_SPEED}.
-
-\begin{lstlisting}[language=Verilog]
-parameter CLK100_SPEED = 10; // 100Mhz = 10nS
-
-initial
-begin
-    CLK_100MHZ = 1'b0;
-    $display("CLK_100MHZ iniciado");
-    #5;
-    forever
-    begin
-        #(CLK100_SPEED/2) CLK_100MHZ = 1'b1;
-        #(CLK100_SPEED/2) CLK_100MHZ = 1'b0;
-    end
-end
-\end{lstlisting}
-
-
-\subsubsection{Salida del módulo}
-
-Finalmente, se asignan las salidas \texttt{Xout} y \texttt{Yout} del módulo con los valores calculados después de completar todas las iteraciones del algoritmo CORDIC. Estas salidas representan las coordenadas rotadas del vector de entrada.
-
-\begin{lstlisting}[language=Verilog]
-
-        assign Xout = X[STG - 1];
-        assign Yout = Y[STG - 1];
-
-\end{lstlisting}
-
-
-
-\subsection{Simulación}
-\label{sec:orgdaca22c}
-
-
-En este documento, se describe el proceso para realizar la simulación del diseño en Vivado y posteriormente generar el archivo .bit que se utilizará para la programación de la FPGA.
-
-\subsection{Simulación en vivado}
-
-Para realizar la simulación en Vivado, sigue estos pasos:
-
-\begin{enumerate}
-    \item \textbf{Crear un proyecto:} Abre Vivado y crea un nuevo proyecto. Selecciona la opción de crear un diseño de tipo "RTL Project" e importa los archivos fuente de tu diseño, incluyendo el código Verilog o VHDL del rotador CORDIC.
-
-    \begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.8\textwidth]{./Figuras/New_project.png}
-    \caption{Crear nuevo proyecto en Vivado}
-    \label{fig:new_proyect}
-    \end{figure}
-    
-        
-    \begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.8\textwidth]{./Figuras/add_source.png}
-    \caption{Importacion de archivos fuente}
-    \label{fig:add_source}
-    \end{figure} 
-       
-   
-    
-    \item \textbf{Configurar simulación:} una vez que hayas creado el proyecto. Ve a la pestaña "Flow Navigator" y selecciona "Simulation". Aquí puedes configurar las opciones de simulación, como el tipo de simulador a utilizar y los archivos de simulación a incluir.
-
-    
-    \item \textbf{Ejecutar la simulación:} después de configurar la simulación, ejecútala haciendo clic en el botón "Run Simulation". Vivado ejecutará la simulación y generará resultados que podrás analizar.
-    \begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.8\textwidth]{./Figuras/Run_simulacion_visual.png}
-    \caption{simulación en Vivado}
-    \label{fig:simulación}
-    \end{figure}
-    
-   
-        \item \textbf{Análisis de resultados:} una vez completada la simulación, analiza los resultados en Vivado. Puedes revisar las formas de onda de las señales de entrada y salida, así como cualquier mensaje de advertencia o error que pueda haberse generado durante la simulación.
-\end{enumerate}
-
-
-    \begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.6\textwidth]{./Figuras/Resultado.png}
-    \caption{Resultados obtenidos de la simulación}
-    \label{fig:esquema}
-    \end{figure}
-
-    
-
-\subsection{Uso de la IP VIO en el módulo \texttt{cordic\_rotator}}
-
-El uso de la IP VIO (Virtual Input/Output) en este contexto proporciona una herramienta poderosa para la simulación y depuración del algoritmo CORDIC implementado en el módulo \texttt{cordic\_rotator}. La IP VIO es una característica de las herramientas de diseño de FPGA, como Xilinx Vivado, que permite la visualización y manipulación de señales dentro de un diseño durante la simulación.
-
-Las entradas de la IP VIO están conectadas a las salidas del módulo \texttt{cordic\_rotator}, mientras que las salidas de la IP VIO se conectan a las entradas del mismo módulo. Esto permite inyectar señales controladas y observar las salidas correspondientes del algoritmo CORDIC en tiempo real durante la simulación.
-
-
-Al conectar las salidas del \texttt{cordic\_rotator} a las entradas de la IP VIO y viceversa, puedes controlar las condiciones de entrada del algoritmo CORDIC y observar las respuestas resultantes. Esto es especialmente útil para verificar el comportamiento del algoritmo bajo diferentes condiciones de entrada y para depurar posibles problemas en la lógica de diseño.
-
-
-    \begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.8\textwidth]{./Figuras/IP_VIO.png}
-    \caption{IP VIO}
-    \label{fig:ip_vio}
-    \end{figure}
-
-
-
-En resumen, la IP VIO se utiliza en este contexto para proporcionar una interfaz gráfica que permite inyectar señales de entrada y observar las salidas correspondientes del algoritmo CORDIC durante la simulación. Esto facilita la depuración y validación del diseño, mejorando así la eficiencia y la precisión del algoritmo implementado.
-
-
-\subsection{Esquema}
-
-El esquema utilizado para conectar las entradas y salidas del rotador CORDIC durante la simulación en Vivado se muestra en la Figura \ref{fig:esquema}.
+Para integrar el módulo \texttt{cordic\_rotator} con \texttt{Cordic\_ip\_v1\_0\_S\_AXI}, se deben tener en cuenta varios parámetros y registros. Los parámetros importantes incluyen el ancho del bus de datos AXI (\textbf{C\_S\_AXI\_DATA\_WIDTH}) que se configura en 32 bits, y el ancho del bus de direcciones AXI (\textbf{C\_S\_AXI\_ADDR\_WIDTH}) que se configura en 5 bits. Además, el ancho de bits para las entradas y salidas del módulo CORDIC (\textbf{c\_parameter}) se configura en 16 bits.
 
 \begin{figure}[ht]
-    \centering
-    \includegraphics[width=1\textwidth]{./Figuras/schematic.png}
-    \caption{Esquema utilizado para la simulación en Vivado IP VIO y CORDIC}
-    \label{fig:esquema}
-\end{figure}
-
-    
-    
-    \begin{figure}[ht]
-    \centering
-    \includegraphics[width=1\textwidth]{./Figuras/squematic_cordic.png}
-    \caption{Esquema de CORDIC}
-    \label{fig:esquema}
+\centering
+\includegraphics[width=0.8\textwidth]{./Figuras/sources_ip.png}
+\captionof{figure}{Integración de modulos IP.}
+\label{fig:Integración de modulos IP}
 \end{figure}
 
 
-\subsection{Generación del archivo .bit}
+Los registros de usuario (\texttt{slv\_reg0} a \texttt{slv\_reg4}) almacenan los datos que se enviarán al módulo \texttt{cordic\_rotator} y recibirán los resultados de este. \texttt{slv\_reg0} contiene el ángulo de rotación (32 bits), \texttt{slv\_reg1} almacena el valor de entrada X (16 bits), y \texttt{slv\_reg2} el valor de entrada Y (16 bits). Las salidas del módulo CORDIC, \texttt{Xout} y \texttt{Yout}, se almacenan en \texttt{slv\_reg3} y \texttt{slv\_reg4} respectivamente, ambas de 17 bits.
 
-Una vez completado y verificado la simulación en vivado, es posible generar generar el archivo .bit para programar la FPGA. A traves de los siguientes pasos:
+El módulo \texttt{cordic\_rotator} tiene varias señales importantes que permiten su funcionamiento correcto. Entre las entradas se encuentran la señal de reloj (\texttt{clock}), que sincroniza las operaciones del módulo, y la señal de ángulo de rotación (\texttt{angle}), que define el ángulo en el que se realizará la rotación CORDIC. Además, el módulo recibe dos valores de entrada, X (\texttt{Xin}) y Y (\texttt{Yin}), que son las coordenadas del punto que se desea rotar. Estas señales de entrada son cruciales para que el módulo pueda calcular las nuevas coordenadas del punto después de aplicar la rotación. Las salidas del módulo son los valores rotados (\texttt{Xout} y \texttt{Yout}), que representan las nuevas coordenadas del punto rotado. Estas salidas se obtienen después de que el módulo procesa las entradas a través del algoritmo CORDIC. A continuación se muestra un diagrama que ilustra la conexión entre los módulos:
 
-\begin{enumerate}
-    \item \textbf{Implementación del diseño:} en Vivado, en la pestaña "Flow Navigator" y selecciona "Implementation". Aquí,  se ejecuta el proceso de implementación para sintetizar y asignar el diseño a los recursos de la FPGA.
-    
-    \item \textbf{Generación del Bitstream:} después de completar la implementación, en la pestaña "Generate Bitstream" en Vivado. Se ejecuta este proceso para generar el archivo .bit, que contiene la configuración del diseño para la FPGA.
-    
-    \begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.65\textwidth]{./Figuras/bitsteam_complete.png}
-    \caption{bitsteam completo}
-    \label{fig:bitsteam_complete}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.8\textwidth]{./Figuras/arquitectura_de_ip_sin_maximizar.png}
+\captionof{figure}{Diagrama de conexión del módulo minimizado \texttt{cordic\_rotator} con \texttt{Cordic\_ip\_v1\_0\_S\_AXI}.}
+\label{fig:Diagrama de conexión del módulo minimizado}
+\end{figure}
+   
+
+La asociación entre \texttt{Cordic\_ip\_v1\_0\_S\_AXI} y \texttt{cordic\_rotator} se realiza conectando las señales de entrada y salida del módulo \texttt{cordic\_rotator} a los registros adecuados del módulo \texttt{Cordic\_ip\_v1\_0\_S\_AXI}. La conexión se realiza como sigue:
+
+\begin{verbatim}
+cordic_rotator cordic_inst (
+    .clock(S_AXI_ACLK),
+    .angle(slv_reg0),
+    .Xin(slv_reg1),
+    .Yin(slv_reg2),
+    .Xout(Xout),
+    .Yout(Yout)
+);
+\end{verbatim}
+
+El proceso de escritura y lectura de datos en los registros se maneja a través de la interfaz AXI. Cuando se recibe una dirección y datos válidos, estos se escriben en los registros correspondientes. Los valores de entrada y el ángulo se transfieren a \texttt{slv\_reg0}, \texttt{slv\_reg1} y \texttt{slv\_reg2}, respectivamente.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.8\textwidth]{./Figuras/entradas_cordic.png}
+\captionof{figure}{Diagrama de conexión del módulo (entradas) \texttt{cordic\_rotator} con \texttt{Cordic\_ip\_v1\_0\_S\_AXI}.}
+\label{fig:Diagrama de conexión del módulo minimizado}
 \end{figure}
 
-    
-    \item \textbf{Programación de la FPGA:} una vez generado el archivo .bit, se utiliza para programar la FPGA. Conecta la FPGA a tu computadora y utiliza el software de programación de Vivado para cargar el archivo .bit en la FPGA.
-\end{enumerate}
+El módulo \texttt{cordic\_rotator} procesa estos datos para realizar la rotación CORDIC y los resultados se almacenan en \texttt{Xout} y \texttt{Yout}. Finalmente, los resultados de la rotación se leen a través de la interfaz AXI desde \texttt{slv\_reg3} y \texttt{slv\_reg4}.
 
-    \begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.65\textwidth]{./Figuras/archivo_bit.png}
-    \caption{Archivo bit}
-    \label{fig:archivo_bit}
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.8\textwidth]{./Figuras/salidas_ip.png}
+\captionof{figure}{Diagrama de conexión del módulo (salidas) \texttt{cordic\_rotator} con \texttt{Cordic\_ip\_v1\_0\_S\_AXI}.}
+\label{fig:Diagrama de conexión del módulo minimizado}
 \end{figure}
 
 
-Con estos pasos, se completa tanto la simulación del diseño en Vivado como la generación del archivo .bit para programar la FPGA.
 
-\textbf{Nota:} El trabajo desarrollado se realizó sobre una FPGA de la firma Xilinx. La placa de desarrollo utilizada es la Arty Z7-10 de la empresa Digilent.
+
+\subsection{Descripción del flujo de trabajo creación IP en vivado}
+
+El flujo de trabajo de implementación de IP en Vivado Design Suite sigue una serie de etapas bien definidas para garantizar el desarrollo efectivo y la integración de los bloques de propiedad intelectual. Comienza con la creación del IP, donde se desarrolla el código fuente junto con la documentación y los archivos de prueba necesarios. Luego, el IP se empaqueta en un archivo que incluye toda la información relevante para su uso en otros diseños, lo que implica configuración, simulación y generación de documentación. A continuación, se lleva a cabo una fase de simulación para verificar la funcionalidad y detectar posibles errores, seguida de un análisis RTL para identificar problemas de diseño. Una vez completadas estas etapas, el código fuente se sintetiza en una representación de circuito lógico y se implementa en el dispositivo FPGA de destino, optimizando la colocación y la ruta de las celdas lógicas.
+
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.8\textwidth]{./Figuras/ip_cordic.png}
+\captionof{figure}{Flujo de trabajo creación IP.}
+\label{fig:Flujo de trabajo creación IP}
+\end{figure}
+
+La imagen muestra el panel de control del Vivado Design Suite, una herramienta de diseño de hardware para dispositivos FPGA de Xilinx. En este panel, se muestra el flujo de trabajo para crear y empaquetar un bloque de propiedad intelectual (IP) denominado "Cordic IP\_v1\_0". Por otro lado, la compatibilidad de IP pre-producción en paquetes IP de Vivado para dispositivos Zynq es un aspecto crucial a considerar en el proceso de diseño. Los IP pre-producción son bloques de propiedad intelectual en desarrollo que aún no están completamente calificados para su implementación en diseños de producción. Xilinx puede ofrecer IP pre-producción para dispositivos Zynq como una opción para que los diseñadores comiencen a trabajar en sus proyectos antes de que el IP esté completamente finalizado. 
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.8\textwidth]{./Figuras/zinq.png}
+\captionof{figure}{Flujo de trabajo creación IP.}
+\label{fig:Flujo de trabajo creación IP}
+\end{figure}
+
+Estos paquetes IP contienen todos los elementos necesarios para utilizar un IP en un diseño de Vivado, incluyendo el código fuente, archivos de simulación y documentación. Sin embargo, es importante tener en cuenta que los IP pre-producción pueden no ser compatibles con todas las versiones de Vivado o todos los dispositivos Zynq. Además, su uso conlleva riesgos, como la posibilidad de errores o la falta de soporte completo por parte de Xilinx. Por lo tanto, se recomienda verificar la compatibilidad del IP pre-producción con la versión de Vivado y el dispositivo Zynq específico que se está utilizando. En caso de planificar el uso del diseño en producción, es aconsejable migrar a un IP con calificación de producción tan pronto como sea posible para evitar posibles problemas y garantizar un soporte adecuado.
 
 \newpage
 
-\section{Análisis de la Síntesis en Vivado}
+\section{Inclusión de IP en el código}
 
-El proceso de síntesis en Vivado proporciona información valiosa sobre el diseño y optimización del circuito. A continuación se presenta un análisis detallado del informe de síntesis generado:
+En esta sección se describe el proceso de inclusión de un núcleo de propiedad intelectual (IP) personalizado en un proyecto utilizando Vivado Design Suite. Se detallan los pasos para modificar la configuración del proyecto, agregar la IP personalizada al diseño y generar el modelo top-level y exportar el diseño de hardware al SDK. La inclusión de IPs personalizadas permite reutilizar módulos de diseño ya desarrollados, facilitando y acelerando el proceso de desarrollo de sistemas complejos.
 
-\begin{lstlisting}[basicstyle=\small\ttfamily]
-****** Vivado v2018.1 (64-bit)
-  **** SW Build 2188600 on Wed Apr  4 18:40:38 MDT 2018
-  **** IP Build 2185939 on Wed Apr  4 20:55:05 MDT 2018
-    ** Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 
-...
-\end{lstlisting}
-
-El informe de síntesis proporciona información sobre la utilización de recursos, optimizaciones aplicadas, advertencias y errores encontrados durante el proceso de síntesis. A continuación se presenta un resumen de los aspectos más importantes del informe:
+\subsection{Modificar la configuración del proyecto}
 
 \begin{enumerate}
-    \item El diseño fue sintetizado sin errores críticos ni advertencias críticas.
-    \item Se utilizaron un total de 80 DSPs y 120 bloques de memoria BRAM.
-    \item Se identificaron y eliminaron elementos de Unisim que no eran necesarios para la síntesis.
-    \item Se observaron algunas advertencias relacionadas con la optimización y el uso de elementos secuenciales no utilizados.
+    \item Hacer click en Settings en el panel Flow Navigator.
+    \item Seleccionar IP $\rightarrow$ Repository en el panel izquierdo de la ventana de configuración del proyecto.
+    \item Hacer click en el símbolo + y navegar hasta el directorio cordic\_ip donde se estableció el repositorio. Aparecerá un mensaje indicando que se agregó un repositorio al proyecto. Presionar OK.
 \end{enumerate}
 
-Este informe proporciona una visión general del proceso de síntesis y las áreas que podrían requerir atención adicional para mejorar el diseño. Es importante revisar cada sección del informe cuidadosamente para garantizar un diseño óptimo y libre de errores.
+
+\subsection{Agregar la IP personalizada}
+
+
+El panel de control de Vivado Design Suite en la etapa de IP Repositories, donde se gestionan los repositorios de IP que contienen los bloques empaquetados. En el repositorio "ip\_repo", se encuentra disponible el IP Cordic\_ip\_v1.0, el cual puede ser utilizado en otros diseños dentro del mismo proyecto o en proyectos diferentes que tengan acceso al repositorio. Este enfoque facilita la reutilización de IP y promueve la eficiencia en el desarrollo de diseños complejos en Vivado Design Suite. De esta manera es neceseario implementar los siguietes pasos para agregar Cordic\_ip\_v1.0 al trabajo:
+
+\begin{enumerate}
+    \item Hacer click sobre Open Block Design debajo de IP Integrator en el panel Flow Navigator.
+    \item En la ventana Diagram hacer botón derecho y seleccionar Add IP ... y buscar Cordic\_ip\_v1.0 en el catálogo colocando sum en el campo de búsqueda.
+    \item Hacer doble click cobre Cordic\_ip\_v1.0 para agregarla al diseño.
+\end{enumerate}
+
+La siguiente imagen ofrece una visión del panel de control de Vivado Design Suite en la fase de IP Repositories, donde se administra la colección de repositorios de propiedad intelectual (IP)
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.7\textwidth]{./Figuras/extracción_ip.png}
+\captionof{figure}{Flujo de trabajo creación IP.}
+\label{fig:Flujo de trabajo creación IP}
+\end{figure}
+
+
+\section{Diagrama de bloques }
+
+La imagen que me enviaste muestra un diagrama de bloques de un sistema informático basado en un System on Chip (SoC) Zynq-7000 de Xilinx, que incluye componentes principales como el Zynq-7000 Processing System, encargado de ejecutar instrucciones y realizar cálculos, y la memoria DDR3, que actúa como la memoria principal para almacenamiento temporal de datos e instrucciones.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.8\textwidth]{./Figuras/Diagrama.png}
+\captionof{figure}{Diagrama de bloques.}
+\label{fig:Diagrama de bloques}
+\end{figure}
+
+
+\subsection{Generar el Top-Level y Export el diseño de hardware al SDK}
+
+\begin{enumerate}
+    \item En el panel Sources, hacer click-derecho sobre system.bd, y seleccionar Generate Output Products … y presionar Generate para generar los archivos de implementación, simulación y síntesis para el diseño (también puede hacer click sobre Generate Block Design en el panel Flow Navigator para hacer lo mismo).
+    \item Hacer click-derecho nuevamente sobre system.bd, y seleccionar Create HDL Wrapper… para generar el modelo top-level de VHDL.
+\end{enumerate}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.8\textwidth]{./Figuras/Generar_HDL.png}
+\captionof{figure}{Generar HDL.}
+\label{fig:Generar HDL}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.8\textwidth]{./Figuras/export_hardware.png}
+\captionof{figure}{Exportar hardware.}
+\label{fig:Generar HDL}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.8\textwidth]{./Figuras/export_hardware.png}
+\captionof{figure}{Exportar hardware.}
+\label{fig:Generar HDL}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.8\textwidth]{./Figuras/launch_sdk.png}
+\captionof{figure}{launch SDK}
+\label{fig:launch SDK}
+\end{figure}
+
+
+\section{Conectar a servidor y SDK.}
+
+En esta sección se describe el proceso de conexión al servidor y la configuración del entorno de desarrollo de software (SDK) para programar y validar el uso de IP cores propios en una FPGA. La conexión al servidor es crucial para la comunicación y transferencia de datos entre el equipo de desarrollo y la FPGA. Posteriormente, se detalla el uso del SDK para cargar y ejecutar el código en el hardware.
+
+
+\subsection{Conectar a servidor}
+
+\begin{enumerate}
+    \item Asegurarse de que el servidor esté conectado.
+    \item Configurar la terminal con 115200 como velocidad. Conectarse al puerto correspondiente.
+\end{enumerate}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.8\textwidth]{./Figuras/conexion_servidor.png}
+\captionof{figure}{Conexión a servidor}
+\label{fig:Conexión a servidor}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.8\textwidth]{./Figuras/empty_application.png}
+\captionof{figure}{Empty application}
+\label{fig:Empty application}
+\end{figure}
+
+\subsection{Código para validar el Uso de IP cores propios}
+
+A continuación se presenta el código en C para validar el uso de IP cores propios utilizando una IP CORDIC en un entorno FPGA. El código inicializa la IP, escribe valores de entrada, lee los valores de salida, y ejecuta una auto-prueba para verificar la funcionalidad de la IP.
+
+\begin{lstlisting}[language=C, caption={Código para validar el uso de IP cores propios}, label={lst:cordic_validation}, basicstyle=\ttfamily\footnotesize, keywordstyle=\color{blue}]
+#include "xparameters.h"
+#include "xil_io.h"
+#include "cordic_ip.h"
+#include <stdio.h>
+
+int main (void) {
+
+
+    u32 base_address = 0x40000000; 
+
+    // Leer valores de salida
+    u32 Xout, Yout;
+
+    for (int i = 0; i <= 45; i++) {
+        // Escribir valores de entrada: Xin = 1, Yin = 0, angle = i grados
+        CORDIC_IP_mWriteReg(base_address, CORDIC_IP_S_AXI_SLV_REG0_OFFSET, 1); 
+        CORDIC_IP_mWriteReg(base_address, CORDIC_IP_S_AXI_SLV_REG1_OFFSET, 0);  
+        CORDIC_IP_mWriteReg(base_address, CORDIC_IP_S_AXI_SLV_REG2_OFFSET, i << 30);
+
+        // Esperar un breve tiempo para que la IP Cordic procese los datos
+        usleep(1000);
+
+        // Leer valores de salida
+        Xout = CORDIC_IP_mReadReg(base_address, CORDIC_IP_S_AXI_SLV_REG3_OFFSET);  
+        Yout = CORDIC_IP_mReadReg(base_address, CORDIC_IP_S_AXI_SLV_REG4_OFFSET);  
+
+        // Imprimir resultados
+        printf("Angulo: %d grados - Xout: %08lx, Yout: %08lx\n", i, Xout, Yout);
+    }
+
+    // Ejecutar auto-prueba
+    if (CORDIC_IP_Reg_SelfTest((void *)base_address) != XST_SUCCESS) {
+        printf("CORDIC IP self-test failed.\n");
+        return -1;
+    }
+
+    printf("CORDIC IP self-test passed.\n");
+    return 0;
+}
+\end{lstlisting}
+
+El código comienza incluyendo los archivos de cabecera necesarios: \texttt{xparameters.h} (proporciona las direcciones base de los dispositivos periféricos), \texttt{xil\_io.h} (define funciones de entrada/salida para el sistema), \texttt{cordic\_ip.h} (define las funciones y macros específicas para la IP CORDIC), y \texttt{stdio.h} (proporciona funciones estándar de entrada/salida en C). 
+
+En la función \texttt{main}, se imprime un mensaje indicando el inicio del programa, se define la dirección base del dispositivo CORDIC, y se declaran las variables para almacenar los valores de salida (\texttt{Xout} y \texttt{Yout}). En un bucle de 0 a 45 grados, se escriben los valores de entrada para \texttt{Xin}, \texttt{Yin} y el ángulo, y se espera brevemente para que la IP CORDIC procese los datos. Luego, se leen los valores de salida \texttt{Xout} y \texttt{Yout} y se imprimen los resultados en la consola. Finalmente, se ejecuta una auto-prueba de la IP CORDIC. Si la auto-prueba falla, se imprime un mensaje de error y se retorna \texttt{-1}. Si la auto-prueba pasa, se imprime un mensaje de éxito y se retorna \texttt{0}.
+
+
+\subsection{SDK}
+
+Para programar la FPGA, primero selecciona Xilinx y luego Program FPGA. A continuación, haz click en el botón Program para iniciar la programación de la FPGA. Una vez completada la programación, en el Project Explorer, selecciona el proyecto Cordic, haz click derecho y elige Run As, Launch on Hardware (GDB). Esto descargará la aplicación, ejecutará el script ps7\_init, y finalmente ejecutará el archivo Cordic.elf.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.8\textwidth]{./Figuras/sdk.png}
+\captionof{figure}{SDK}
+\label{fig:SDK}
+\end{figure}
 
 \newpage
 
 \section{Conclusiones}
 
-El diseño del Cordic se realizó de manera exitosa, utilizando un ancho de bits adecuado para los datos de entrada y salida, así como para los vectores $X$ e $Y$. Se implementó una tabla de valores atan para mejorar la eficiencia del algoritmo. Sin embargo, a pesar de los intentos de generar valores negativos para las coordenadas $X$ e $Y$, se observó que estas se desbordaban debido a la configuración de los cuadrantes y el ángulo de rotación. Por lo tanto, no fue posible disponer de valores de seno y coseno en el rango de coordenadas negativas.
+En este documento, hemos abordado en detalle la implementación y validación de un módulo CORDIC Rotator en Verilog, su integración en un entorno FPGA utilizando Vivado Design Suite y su posterior verificación mediante un entorno de desarrollo de software (SDK). A continuación, se resumen los puntos clave:
 
-\begin{lstlisting}[language=Verilog]
+\begin{enumerate}
+    \item \textbf{Implementación del Módulo CORDIC Rotator:}
+    \begin{itemize}
+        \item Se explicó cómo se configura el módulo en Verilog, comenzando con la definición de parámetros como el ancho de bits de entrada y salida.
+        \item La implementación detalló la tabla de arco tangente y las diferentes iteraciones del algoritmo CORDIC para realizar rotaciones de vectores en el plano cartesiano.
+        \item Se cubrieron los ajustes necesarios para manejar ángulos de rotación en los cuatro cuadrantes del sistema cartesiano.
+    \end{itemize}
+    
+    \item \textbf{Creación de una IP Personalizada:}
+    \begin{itemize}
+        \item Se describió el proceso de crear una IP personalizada en Vivado, utilizando el módulo CORDIC Rotator.
+        \item El uso del template de periférico esclavo de Vivado y la configuración de los registros y parámetros necesarios para la IP.
+        \item La integración del módulo CORDIC Rotator con la IP personalizada y su conexión a través de la interfaz AXI.
+    \end{itemize}
+    
+    \item \textbf{Flujo de Trabajo en Vivado:}
+    \begin{itemize}
+        \item Se explicó el flujo de trabajo completo en Vivado Design Suite, desde la creación del IP hasta la generación de productos de salida y la exportación del diseño de hardware al SDK.
+        \item La importancia de realizar simulaciones y análisis RTL para verificar la funcionalidad del diseño antes de la implementación en el hardware.
+    \end{itemize}
+    
+    \item \textbf{Incorporación de la IP en el Proyecto:}
+    \begin{itemize}
+        \item Se detallaron los pasos para modificar la configuración del proyecto en Vivado, agregar la IP personalizada al diseño y generar el modelo top-level.
+        \item La descripción del diagrama de bloques del sistema y cómo se integran los componentes principales, incluyendo la memoria DDR3 y el Zynq-7000 Processing System.
+    \end{itemize}
+    
+    \item \textbf{Validación del Uso de IP Cores:}
+    \begin{itemize}
+        \item Se presentó el código en C para validar la funcionalidad de la IP CORDIC mediante la inicialización de la IP, la escritura de valores de entrada y la lectura de los valores de salida.
+        \item La importancia de realizar pruebas automáticas para asegurar la correcta operación de la IP en el entorno FPGA.
+    \end{itemize}
+\end{enumerate}
 
-module cordic_rotator #(parameter c_parameter = 16)
-                      (input clock,
-                       input signed [31:0] angle,
-                       input signed [c_parameter-1:0] Xin,
-                       input signed [c_parameter-1:0] Yin,
-                       output signed [c_parameter:0] Xout,
-                       output signed [c_parameter:0] Yout);
-
-endmodule
-\end{lstlisting}
-
-
-El módulo VIO se diseñó para facilitar la verificación y depuración del sistema. Proporciona entradas y salidas virtuales para simular el comportamiento del diseño en un entorno controlado. Se utilizó un ancho de bits suficiente para los datos de entrada y salida del VIO. Esto permite una fácil observación de los valores de entrada y salida durante la simulación.
-
-
-El Cordic y el VIO se unificaron para formar un proyecto completo. El Cordic se utiliza para el cálculo de funciones trigonométricas, mientras que el VIO proporciona una interfaz para ingresar los datos de entrada y visualizar los resultados de salida. Esta integración permite una verificación exhaustiva del diseño y garantiza su funcionalidad correcta.
 
 \newpage
 \section{Bibliografía}
