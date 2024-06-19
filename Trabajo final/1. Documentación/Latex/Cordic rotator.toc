@@ -20,9 +20,12 @@
 \contentsline {subsection}{\numberline {5.2}Agregar la IP personalizada}{18}{subsection.5.2}%
 \contentsline {section}{\numberline {6}Diagrama de bloques }{19}{section.6}%
 \contentsline {subsection}{\numberline {6.1}Generar el Top-Level y Export el diseño de hardware al SDK}{19}{subsection.6.1}%
-\contentsline {section}{\numberline {7}Conectar a servidor y SDK.}{20}{section.7}%
-\contentsline {subsection}{\numberline {7.1}Conectar a servidor}{21}{subsection.7.1}%
-\contentsline {subsection}{\numberline {7.2}Código para validar el Uso de IP cores propios}{21}{subsection.7.2}%
-\contentsline {subsection}{\numberline {7.3}SDK}{25}{subsection.7.3}%
+\contentsline {subsubsection}{\numberline {6.1.1}Generación de HDL}{20}{subsubsection.6.1.1}%
+\contentsline {subsubsection}{\numberline {6.1.2}Exportación de hardware}{20}{subsubsection.6.1.2}%
+\contentsline {subsubsection}{\numberline {6.1.3}Lanzamiento del SDK}{21}{subsubsection.6.1.3}%
+\contentsline {subsubsection}{\numberline {6.1.4}Creación de proyecto en Empty Application}{22}{subsubsection.6.1.4}%
+\contentsline {section}{\numberline {7}Conectar a servidor y validaccion de código.}{22}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Conectar a servidor}{23}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Código para validar el Uso de IP cores propios}{23}{subsection.7.2}%
 \contentsline {section}{\numberline {8}Conclusiones}{26}{section.8}%
 \contentsline {section}{\numberline {9}Bibliografía}{28}{section.9}%

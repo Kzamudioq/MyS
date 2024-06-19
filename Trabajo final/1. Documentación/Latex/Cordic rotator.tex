@@ -458,7 +458,12 @@ La imagen que me enviaste muestra un diagrama de bloques de un sistema informát
 \begin{enumerate}
     \item En el panel Sources, hacer click-derecho sobre system.bd, y seleccionar Generate Output Products … y presionar Generate para generar los archivos de implementación, simulación y síntesis para el diseño (también puede hacer click sobre Generate Block Design en el panel Flow Navigator para hacer lo mismo).
     \item Hacer click-derecho nuevamente sobre system.bd, y seleccionar Create HDL Wrapper… para generar el modelo top-level de VHDL.
+    
 \end{enumerate}
+
+\subsubsection{Generación de HDL}
+
+En este paso, se procederá a la generación del código HDL (Hardware Description Language) a partir del diseño en bloque creado. Este código es fundamental para la implementación y síntesis del diseño en el hardware. Asegúrese de seguir cuidadosamente los pasos mencionados anteriormente para garantizar una correcta generación del código HDL.
 
 \begin{figure}[ht]
 \centering
@@ -467,12 +472,9 @@ La imagen que me enviaste muestra un diagrama de bloques de un sistema informát
 \label{fig:Generar HDL}
 \end{figure}
 
-\begin{figure}[ht]
-\centering
-\includegraphics[width=0.8\textwidth]{./Figuras/export_hardware.png}
-\captionof{figure}{Exportar hardware.}
-\label{fig:Generar HDL}
-\end{figure}
+\subsubsection{Exportación de hardware}
+
+Una vez generado el código HDL, el siguiente paso es exportar el diseño de hardware. Este proceso implica preparar el diseño para su implementación en un dispositivo físico, como una FPGA. La exportación del hardware incluye la generación de archivos necesarios para la configuración y el funcionamiento del dispositivo.
 
 \begin{figure}[ht]
 \centering
@@ -480,6 +482,10 @@ La imagen que me enviaste muestra un diagrama de bloques de un sistema informát
 \captionof{figure}{Exportar hardware.}
 \label{fig:Generar HDL}
 \end{figure}
+
+\subsubsection{Lanzamiento del SDK}
+
+El SDK (Software Development Kit) es una herramienta crucial para el desarrollo de software embebido. Después de exportar el hardware, se debe lanzar el SDK para comenzar el desarrollo de software sobre el diseño de hardware implementado. Este paso asegura que el entorno de desarrollo está correctamente configurado para trabajar con el hardware.
 
 \begin{figure}[ht]
 \centering
@@ -488,18 +494,30 @@ La imagen que me enviaste muestra un diagrama de bloques de un sistema informát
 \label{fig:launch SDK}
 \end{figure}
 
+\subsubsection{Creación de proyecto en Empty Application}
 
-\section{Conectar a servidor y SDK.}
+Dentro del SDK, se creará un nuevo proyecto utilizando la plantilla de aplicación vacía (Empty Application). Esto proporciona una base limpia y sencilla sobre la cual construir el software necesario para interactuar con el hardware exportado. Asegúrese de seleccionar la opción correcta para iniciar con un entorno de desarrollo adecuado.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.6\textwidth]{./Figuras/empty_application.png}
+\captionof{figure}{Empty application}
+\label{fig:Empty application}
+\end{figure}
+
+
+
+
+
+\section{Conectar a servidor y validaccion de código.}
 
 En esta sección se describe el proceso de conexión al servidor y la configuración del entorno de desarrollo de software (SDK) para programar y validar el uso de IP cores propios en una FPGA. La conexión al servidor es crucial para la comunicación y transferencia de datos entre el equipo de desarrollo y la FPGA. Posteriormente, se detalla el uso del SDK para cargar y ejecutar el código en el hardware.
 
 
 \subsection{Conectar a servidor}
 
-\begin{enumerate}
-    \item Asegurarse de que el servidor esté conectado.
-    \item Configurar la terminal con 115200 como velocidad. Conectarse al puerto correspondiente.
-\end{enumerate}
+
+Se aseguró de que el servidor estuviera conectado y se configuró la terminal con una velocidad de 115200. Luego, se conectó al puerto correspondiente.
 
 \begin{figure}[ht]
 \centering
@@ -508,16 +526,25 @@ En esta sección se describe el proceso de conexión al servidor y la configurac
 \label{fig:Conexión a servidor}
 \end{figure}
 
-\begin{figure}[ht]
-\centering
-\includegraphics[width=0.8\textwidth]{./Figuras/empty_application.png}
-\captionof{figure}{Empty application}
-\label{fig:Empty application}
-\end{figure}
+
 
 \subsection{Código para validar el Uso de IP cores propios}
 
 A continuación se presenta el código en C para validar el uso de IP cores propios utilizando una IP CORDIC en un entorno FPGA. El código inicializa la IP, escribe valores de entrada, lee los valores de salida, y ejecuta una auto-prueba para verificar la funcionalidad de la IP.
+
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.8\textwidth]{./Figuras/Proyecto_SDK.png}
+\captionof{figure}{SDK}
+\label{fig:Visualizacion de codigo c en SDK}
+\end{figure}
+
+
+El código comienza incluyendo los archivos de cabecera necesarios: \texttt{xparameters.h} (proporciona las direcciones base de los dispositivos periféricos), \texttt{xil\_io.h} (define funciones de entrada/salida para el sistema), \texttt{cordic\_ip.h} (define las funciones y macros específicas para la IP CORDIC), y \texttt{stdio.h} (proporciona funciones estándar de entrada/salida en C). 
+
+En la función \texttt{main}, se imprime un mensaje indicando el inicio del programa, se define la dirección base del dispositivo CORDIC, y se declaran las variables para almacenar los valores de salida (\texttt{Xout} y \texttt{Yout}). En un bucle de 0 a 45 grados, se escriben los valores de entrada para \texttt{Xin}, \texttt{Yin} y el ángulo, y se espera brevemente para que la IP CORDIC procese los datos. Luego, se leen los valores de salida \texttt{Xout} y \texttt{Yout} y se imprimen los resultados en la consola. Finalmente, se ejecuta una auto-prueba de la IP CORDIC. Si la auto-prueba falla, se imprime un mensaje de error y se retorna \texttt{-1}. Si la auto-prueba pasa, se imprime un mensaje de éxito y se retorna \texttt{0}.
+
 
 \begin{lstlisting}[language=C, caption={Código para validar el uso de IP cores propios}, label={lst:cordic_validation}, basicstyle=\ttfamily\footnotesize, keywordstyle=\color{blue}]
 #include "xparameters.h"
@@ -561,21 +588,8 @@ int main (void) {
 }
 \end{lstlisting}
 
-El código comienza incluyendo los archivos de cabecera necesarios: \texttt{xparameters.h} (proporciona las direcciones base de los dispositivos periféricos), \texttt{xil\_io.h} (define funciones de entrada/salida para el sistema), \texttt{cordic\_ip.h} (define las funciones y macros específicas para la IP CORDIC), y \texttt{stdio.h} (proporciona funciones estándar de entrada/salida en C). 
-
-En la función \texttt{main}, se imprime un mensaje indicando el inicio del programa, se define la dirección base del dispositivo CORDIC, y se declaran las variables para almacenar los valores de salida (\texttt{Xout} y \texttt{Yout}). En un bucle de 0 a 45 grados, se escriben los valores de entrada para \texttt{Xin}, \texttt{Yin} y el ángulo, y se espera brevemente para que la IP CORDIC procese los datos. Luego, se leen los valores de salida \texttt{Xout} y \texttt{Yout} y se imprimen los resultados en la consola. Finalmente, se ejecuta una auto-prueba de la IP CORDIC. Si la auto-prueba falla, se imprime un mensaje de error y se retorna \texttt{-1}. Si la auto-prueba pasa, se imprime un mensaje de éxito y se retorna \texttt{0}.
 
 
-\subsection{SDK}
-
-Para programar la FPGA, primero selecciona Xilinx y luego Program FPGA. A continuación, haz click en el botón Program para iniciar la programación de la FPGA. Una vez completada la programación, en el Project Explorer, selecciona el proyecto Cordic, haz click derecho y elige Run As, Launch on Hardware (GDB). Esto descargará la aplicación, ejecutará el script ps7\_init, y finalmente ejecutará el archivo Cordic.elf.
-
-\begin{figure}[ht]
-\centering
-\includegraphics[width=0.8\textwidth]{./Figuras/sdk.png}
-\captionof{figure}{SDK}
-\label{fig:SDK}
-\end{figure}
 
 \newpage
 
